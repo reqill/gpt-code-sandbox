@@ -1,13 +1,13 @@
 {
   "version": 2,
+  "devCommand": "npm run start",
   "builds": [
     {
-      "src": "package.json",
+      "src": "dist/index.js",
       "use": "@vercel/node",
       "config": { "includeFiles": ["dist/**"] }
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/dist/index.js" }],
   "routes": [
     {
       "src": "/(.*)",
