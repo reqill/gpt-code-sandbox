@@ -1,24 +1,16 @@
 {
   "version": 2,
-  "devCommand": "npm run start",
   "builds": [
     {
-      "src": "dist/index.js",
+      "src": "index.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["dist/**"] }
+      "config": { "includeFiles": ["openapi.yaml"] }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/index.js",
-      "methods": ["POST", "GET"],
-      "headers": {
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, GET",
-        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-      }
+      "dest": "index.js"
     }
   ]
 }
