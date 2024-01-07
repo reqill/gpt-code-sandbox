@@ -12,7 +12,7 @@ const app = express(),
   CODE_SANDBOX_API = "https://codesandbox.io/api/v1/sandboxes/define",
   CODE_SANBOX_BY_ID = "https://codesandbox.io/s";
 
-if (process.env.DEV === "true") {
+if (!process.env.VERCEL) {
   app.listen(process.env.PORT || PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });

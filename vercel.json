@@ -2,9 +2,9 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/index.js",
+      "src": "package.json",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["path/to/openapi.yaml", "dist/**"] }
+      "config": { "includeFiles": ["dist/**"] }
     }
   ],
   "routes": [
