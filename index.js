@@ -41,7 +41,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  const { name, dependencies, files } = req.body;
+  const {
+    data: { name, dependencies, files },
+  } = req.body;
 
   if (Object.keys(files).length === 0) {
     res.status(400).send("No files provided");

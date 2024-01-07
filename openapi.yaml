@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: CodeSandbox API
-  version: 1.0.0
+  version: 1.0.2
   description: API to create sandboxes on CodeSandbox by ChatGPT
 
 servers:
@@ -19,7 +19,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GeneralPostPayload"
+              type: object
+              properties:
+                data:
+                  type: object
+                  required:
+                    - name
+                    - files
+                  properties:
+                    name:
+                      type: string
+                      example: "My Sandbox"
+                    dependencies:
+                      type: object
+                      additionalProperties:
+                        type: string
+                      example:
+                        react: "^17.0.1"
+                        react-dom: "^17.0.1"
+                    files:
+                      type: object
+                      additionalProperties:
+                        $ref: "#/components/schemas/File"
       responses:
         "200":
           description: Successfully created the sandbox
@@ -35,27 +56,6 @@ paths:
 
 components:
   schemas:
-    GeneralPostPayload:
-      type: object
-      properties:
-        name:
-          type: string
-          example: "My Sandbox"
-        dependencies:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            react: "^17.0.1"
-            react-dom: "^17.0.1"
-        files:
-          type: object
-          additionalProperties:
-            $ref: "#/components/schemas/File"
-      required:
-        - name
-        - files
-
     File:
       type: object
       properties:
