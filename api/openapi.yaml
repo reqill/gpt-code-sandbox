@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: CodeSandbox API
+  version: 1.0.0
+  description: API to create sandboxes on CodeSandbox by ChatGPT
+
+servers:
+  - url: http://localhost:8080
+    description: Development server
+
+paths:
+  /:
+    post:
+      summary: Create a new sandbox
+      description: Creates a new sandbox on CodeSandbox with the provided files and dependencies.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneralPostPayload"
+      responses:
+        "200":
+          description: Successfully created the sandbox
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "https://codesandbox.io/s/sandbox-id"
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+
+components:
+  schemas:
+    GeneralPostPayload:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "My Sandbox"
+        dependencies:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            react: "^17.0.1"
+            react-dom: "^17.0.1"
+        files:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/File"
+      required:
+        - name
+        - files
+
+    File:
+      type: object
+      properties:
+        content:
+          type: string
+          example: 'console.log("Hello, world!");'
+        isBinary:
+          type: boolean
+          example: false
+      required:
+        - content
