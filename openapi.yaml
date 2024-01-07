@@ -5,8 +5,6 @@ info:
   description: API to create sandboxes on CodeSandbox by ChatGPT
 
 servers:
-  - url: http://localhost:8080
-    description: Development server
   - url: https://gpt-code-sandbox.vercel.app
     description: Production server
 
@@ -15,6 +13,7 @@ paths:
     post:
       summary: Create a new sandbox
       description: Creates a new sandbox on CodeSandbox with the provided files and dependencies.
+      operationId: createSandbox
       requestBody:
         required: true
         content:
